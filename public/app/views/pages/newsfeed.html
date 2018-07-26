@@ -129,13 +129,16 @@
                   <i class="em em-thumbsup"></i> {{post.content}}</p>
               </div>
               <div class="line-divider"></div>
-              <div ng-show="toggle">
-                <div class="post-comment">
+              <div >
+                <div class="post-comment" ng-repeat="comment in newsfeed.comments_data.get(post._id)">
                   <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
                   <p>
-                    <a href="timeline.html" class="profile-link">Cris </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua. Ut enim ad minim veniam
+                    <a href="timeline.html" class="profile-link">{{comment.user_email}} </a> {{comment.content}} 
+                    <i>{{newsfeed.moment(comment.posted_on).fromNow()}}</i>
                     <i class="em em-muscle"></i>
+                    <a ng-if="newsfeed.current_user == comment.user_email" class="btn btn-danger" ng-click="newsfeed.deleteComment(comment._id,comment.feed_id,$index)">
+                      <i class="fa fa-trash"></i>
+                    </a>
                   </p>
                 </div>
               </div>
@@ -145,13 +148,13 @@
                   <i class="icon ion-thumbsup"></i> 23</a>
                 <a class="btn text-red">
                   <i class="fa fa-thumbs-down"></i> 4</a>
-                <button id="toggleMessage" class="btn-show-hide" ng-click="toggle=!toggle"> {{toggle ? 'Hide Comments' : 'Show Comments'}} </button>
+                <button id="toggleMessage" class="btn-show-hide" ng-click="newsfeed.getComments(post._id)"> {{toggle ? 'Hide Comments' : 'Show Comments'}} </button>
               </div>
               <br>
               <div class="post-comment">
                 <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                <input type="text" class="form-control" placeholder="Post a comment">
-                <button type="submit " class="button-sub"> Submit </button>
+                <input type="text" class="form-control" placeholder="Post a comment" ng-model="newsfeed.comment_new">
+                <button type="submit" ng-click="newsfeed.addComment(post._id)" class="button-sub"> Submit </button>
               </div>
             </div>
           </div>
