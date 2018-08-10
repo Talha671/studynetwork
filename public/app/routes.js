@@ -29,6 +29,9 @@ app.config(function($routeProvider , $locationProvider){
     .when('/About/:userId', {
         templateUrl: 'app/views/pages/timeline-about.html'
     })
+    .when('/About', {
+        templateUrl: 'app/views/pages/timeline-about.html'
+    })
 
     .when('/edit-profile-basic', {
         templateUrl: 'app/views/pages/edit-profile-basic.html'

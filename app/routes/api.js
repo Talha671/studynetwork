@@ -119,6 +119,11 @@ module.exports = function(router) {
         });
               
 
+        router.get('/comments',function (req,res) {
+            res.send('hey')
+        })
+        require('./feed/index')(router)
+        require('./comments/index')(router)
         
 
       return router;
